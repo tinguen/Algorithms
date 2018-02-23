@@ -9,7 +9,7 @@ List::List() {
 }
 
 List::~List() {
-    clear;
+    clear();
 }
 
 Node *List::insert(int position, int num) {

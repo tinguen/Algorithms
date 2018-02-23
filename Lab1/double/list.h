@@ -22,6 +22,7 @@ public:
     int length;
 
     List();
+    ~List();
 
     Node *insert(int position, int num);
     Node *addNode(int num);
