@@ -1,4 +1,5 @@
-#include "./list.h"
+#include "test.h"
+#include "list.h"
 
 int main() {
     int movers, students;
@@ -33,10 +34,9 @@ int main() {
     l1.display(); // before
     l2.display();
     l1.moveElements(movers, &l2);
-    l1.insert(5, 100);
     l1.display(); // after
     l2.display();
-
+    test();
 }
 
 

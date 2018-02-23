@@ -27,8 +27,8 @@ public:
     Node *insert(int position, int num);
     Node *addNode(int num);
     void remove(int position);
-    int size();
     void display();
+    void fDisplay();
     void fill(int from, int to);
     void clear();
     void moveElements(int L, List *to);

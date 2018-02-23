@@ -8,6 +8,7 @@ List::List() {
 
 List::~List() {
     clear();
+    std::remove("output");
 }
 
 Node *List::insert(int position, int num) {
@@ -61,6 +62,21 @@ void List::display() {
         curr = curr->next;
     }
     cout << endl;
+}
+
+void List::fDisplay() {
+    ofstream file;
+    file.open("output", ios_base::app);
+    if (!file) {
+        file.open("output");
+    }
+    Node *temp = head;
+    while (temp != nullptr) {
+        file << temp->student << endl;
+        temp = temp->next;
+    }
+    file << endl;
+    file.close();
 }
 
 void List::fill(int from, int to) {

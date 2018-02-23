@@ -20,6 +20,7 @@ public:
     Node *insert(int position, int num);
     Node *addNode(int num);
     void display();
+    void fDisplay();
     void fill(int from, int to);
     void remove(int position);
     void clear();
