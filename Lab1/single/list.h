@@ -1,29 +1,33 @@
-#include <iostream>
-#include <fstream>
 #include <string>
+#include <iostream>
+
 
 using namespace std;
 
 struct Node {
     int student;
     Node *next;
+    Node();
+    ~Node();
 };
 
 class List {
-public:
+private:
     Node *head, *tail;
     int length;
-
+public:
     List();
     ~List();
 
-    Node *insert(int position, int num);
-    Node *addNode(int num);
-    void display();
-    void fDisplay();
+    Node *begin();
+    Node *end();
+    int size();
+    int insert(int position, int num);
+    int push(int num);
+    string to_string();
     void fill(int from, int to);
     void remove(int position);
     void clear();
-    void moveElements(int L, List *to);
+    void move_elements(int movers, List *to);
 };
 

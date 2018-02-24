@@ -1,5 +1,4 @@
 #include "list.h"
-#include "test.h"
 
 int main() {
     int movers, students;
@@ -30,10 +29,9 @@ int main() {
     List l2;
     l1.fill(1, students);
     l2.fill(1, students);
-    l1.display();
-    l2.display();
-    l1.moveElements(movers, &l2);
-    l1.display();
-    l2.display();
-    test();
+    cout << l1.to_string();
+    cout << l2.to_string();
+    l1.move_elements(movers, &l2);
+    cout << l1.to_string();
+    cout << l2.to_string();
 }

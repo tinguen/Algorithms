@@ -1,8 +1,8 @@
-single: clean list.o test.o
-	g++ list.o test.o main.cpp -o single.o
+single: clean list.o
+	g++ list.o main.cpp -o single.o
 list.o: 
 	g++ -c list.cpp
-test.o:
-	g++ -c test.cpp
+test:	clean list.o
+	g++ list.o test.cpp -o test.o
 clean:
 	rm -f *.o

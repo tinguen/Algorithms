@@ -1,6 +1,13 @@
-#include "./list.h"
+#include "list.h"
 
 using namespace std;
+
+Node::Node() {
+    student = 0;
+    next = nullptr;
+}
+
+Node::~Node() {}
 
 List::List() {
     head = nullptr;
@@ -10,35 +17,49 @@ List::List() {
 
 List::~List() {
     clear();
-    std::remove("output");
 }
 
-Node *List::insert(int position, int num) {
-    Node *temp = head;
-    Node *curr = new Node();
-    curr->student = num;
+Node *List::begin() {
+    return head;
+}
+
+Node *List::end() {
+    return tail;
+}
+
+int List::size() {
+    return length;
+}
+
+int List::insert(int position, int num) {
     int size = length;
     if (position > size || position < 0) {
         throw invalid_argument("Invalid position");
     }
+    if (position == size || head == nullptr) {
+        push(num);
+        return num;
+    }
+    Node *temp = head;
+    Node *curr = new Node();
     curr->student = num;
+    if (position == 0) {
+        curr->next = temp;
+        head = curr;
+        length++;
+        return num;
+    }
     // getting the last element before the right position
     for (int i = 0; i < position - 2; i++) {
         temp = temp->next;
     }
     curr->next = temp->next;
     temp->next = curr;
-    if (position == 0) {
-        head = curr;
-    }
-    if (position == size) {
-        tail = curr;
-    }
     length++;
-    return curr;
+    return num;
 }
 
-Node *List::addNode(int num) {
+int List::push(int num) {
     Node *curr = new Node();
     curr->student = num;
     curr->next = nullptr;
@@ -50,63 +71,48 @@ Node *List::addNode(int num) {
         tail = curr;
     }
     length++;
-    return curr;
+    return num;
 }
 
-void List::display() {
-    Node *temp = head;
-    while (temp != nullptr) {
-        cout << temp->student << endl;
-        temp = temp->next;
+string List::to_string() {
+    if (length == 0) {
+        return "";
     }
-    cout<< endl;
-}
-
-void List::fDisplay() {
-    ofstream file;
-    file.open("output", ios_base::app);
-    if (!file) {
-        file.open("output");
+    string s = std::to_string(head->student);
+    Node *curr = head->next;
+    while (curr != nullptr) {
+        s = s + ", " + std::to_string(curr->student);
+        curr = curr->next;
     }
-    Node *temp = head;
-    while (temp != nullptr) {
-        file << temp->student << endl;
-        temp = temp->next;
-    }
-    file << endl;
-    file.close();
+    s = s + '\n';
+    return s;
 }
 
 void List::fill(int from, int to) {
     for (int i = from; i <= to; i++) {
-        addNode(i);
+        push(i);
     }
 }
 
 void List::remove(int position) {
     int size = length;
-    if (position > size || position < 0) {
+    if (position > size || position <= 0) {
         throw invalid_argument("Invalid position");
     }
-
     Node *curr = head;
-
     // getting the last element before the one to remove
     for (int i = 0; i < position - 2; i++) {
         curr = curr->next;
     }
-
-    if (position == 0) {
+    if (position == 1) {
         head = curr->next;
         delete curr;
-        curr = nullptr;
     }
-
     if (position == size) {
         tail = curr;
         delete curr->next;
         curr->next = nullptr;
-    } else if (position > 0) {
+    } else if (position > 1) {
         Node *temp = curr->next;
         curr->next = curr->next->next;
         delete temp;
@@ -127,7 +133,7 @@ void List::clear() {
     length = 0;
 }
 
-void List::moveElements(int L, List *to) {
+void List::move_elements(int L, List *to) {
     Node *curr = head;
     Node *temp = head;
     // getting the last element to move

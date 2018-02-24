@@ -1,12 +1,7 @@
-//
-// Created by Tin on 2/22/18.
-//
-
 #ifndef LAB1_A_LIST_H
 #define LAB1_A_LIST_H
-#include <iostream>
-#include <fstream>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -14,24 +9,28 @@ struct Node {
     int student;
     Node *prev;
     Node *next;
+    Node();
+    ~Node();
 };
 
 class List {
-public:
-    Node *head, *tail;
+private:
+    Node *head;
+    Node *tail;
     int length;
-
+public:
     List();
     ~List();
-
-    Node *insert(int position, int num);
-    Node *addNode(int num);
+    string to_string();
+    Node *begin();
+    Node *end();
+    int size();
+    int insert(int position, int num);
+    int push(int num);
     void remove(int position);
-    void display();
-    void fDisplay();
     void fill(int from, int to);
     void clear();
-    void moveElements(int L, List *to);
+    void move_elements(int L, List *to);
 };
 
 #endif //LAB1_A_LIST_H

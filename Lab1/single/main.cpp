@@ -1,4 +1,3 @@
-#include "test.h"
 #include "list.h"
 
 int main() {
@@ -31,12 +30,11 @@ int main() {
     l1.fill(1, students);
     l2.fill(1, students);
     // test
-    l1.display(); // before
-    l2.display();
-    l1.moveElements(movers, &l2);
-    l1.display(); // after
-    l2.display();
-    test();
+    cout << l1.to_string(); // before
+    cout << l2.to_string();
+    l1.move_elements(movers, &l2);
+    cout << l1.to_string(); // after
+    cout << l2.to_string();
 }
 
 
