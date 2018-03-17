@@ -4,16 +4,19 @@
 
 using namespace std;
 
-struct Node {
-    int data;
-    Node *next;
-    Node();
-    ~Node();
-};
-
 class List {
 private:
-    Node *head, *tail;
+    struct Node {
+        int data;
+        Node *next;
+        Node() {
+            data = 0;
+            next = nullptr;
+        };
+        ~Node() {};
+    };
+    Node *head;
+    Node *tail;
     size_t length;
 public:
     List();

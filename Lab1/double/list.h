@@ -5,20 +5,19 @@
 
 using namespace std;
 
-struct Node {
-    int data;
-    Node *prev;
-    Node *next;
-    Node() {
-        data = 0;
-        prev = nullptr;
-        next = nullptr;
-    };
-    ~Node() {};
-};
-
 class List {
 private:
+    struct Node {
+        int data;
+        Node *prev;
+        Node *next;
+        Node() {
+            data = 0;
+            prev = nullptr;
+            next = nullptr;
+        };
+        ~Node() {};
+    };
     Node *head;
     Node *tail;
     size_t length;
