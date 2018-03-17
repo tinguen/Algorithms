@@ -13,6 +13,6 @@ Do the following to run the program(tested on macOS 10.13.3):
 3. `./single.o` or `./double.o`
 
 Do the following to run the tests(tested on macOS in CLion 2017.3.2):
-1. Install boost library
+1. Install `boost` library
 2. Import new project with test.cpp, list.h and list.cpp in CLion
 3. Run it

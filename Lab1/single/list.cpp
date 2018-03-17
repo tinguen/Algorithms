@@ -3,7 +3,7 @@
 using namespace std;
 
 Node::Node() {
-    student = 0;
+    data = 0;
     next = nullptr;
 }
 
@@ -19,35 +19,23 @@ List::~List() {
     clear();
 }
 
-Node *List::begin() {
-    return head;
-}
-
-Node *List::end() {
-    return tail;
-}
-
-int List::size() {
-    return length;
-}
-
-int List::insert(int position, int num) {
+void List::insert(int position, int num) {
     int size = length;
     if (position > size || position < 0) {
-        throw invalid_argument("Invalid position");
+        throw out_of_range("Invalid position");
     }
     if (position == size || head == nullptr) {
         push(num);
-        return num;
+        return;
     }
     Node *temp = head;
     Node *curr = new Node();
-    curr->student = num;
+    curr->data = num;
     if (position == 0) {
         curr->next = temp;
         head = curr;
         length++;
-        return num;
+        return;
     }
     // getting the last element before the right position
     for (int i = 0; i < position - 2; i++) {
@@ -56,12 +44,12 @@ int List::insert(int position, int num) {
     curr->next = temp->next;
     temp->next = curr;
     length++;
-    return num;
+    return;
 }
 
-int List::push(int num) {
+void List::push(int num) {
     Node *curr = new Node();
-    curr->student = num;
+    curr->data = num;
     curr->next = nullptr;
     if (head == nullptr) {
         head = curr;
@@ -71,20 +59,19 @@ int List::push(int num) {
         tail = curr;
     }
     length++;
-    return num;
 }
 
 string List::to_string() {
     if (length == 0) {
         return "";
     }
-    string s = std::to_string(head->student);
+    string s = std::to_string(head->data);
     Node *curr = head->next;
     while (curr != nullptr) {
-        s = s + ", " + std::to_string(curr->student);
+        s += ", " + std::to_string(curr->data);
         curr = curr->next;
     }
-    s = s + '\n';
+    s += '\n';
     return s;
 }
 
@@ -94,10 +81,11 @@ void List::fill(int from, int to) {
     }
 }
 
-void List::remove(int position) {
+int List::remove(int position) {
     int size = length;
+    int value;
     if (position > size || position <= 0) {
-        throw invalid_argument("Invalid position");
+        throw out_of_range("Invalid position");
     }
     Node *curr = head;
     // getting the last element before the one to remove
@@ -106,18 +94,22 @@ void List::remove(int position) {
     }
     if (position == 1) {
         head = curr->next;
+        value = curr->data;
         delete curr;
     }
     if (position == size) {
         tail = curr;
+        value = curr->next->data;
         delete curr->next;
         curr->next = nullptr;
     } else if (position > 1) {
         Node *temp = curr->next;
         curr->next = curr->next->next;
+        value = temp->data;
         delete temp;
     }
     length--;
+    return value;
 }
 
 void List::clear() {

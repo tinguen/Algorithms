@@ -1,13 +1,5 @@
 #include "list.h"
 
-Node::Node() {
-    student = 0;
-    prev = nullptr;
-    next = nullptr;
-};
-
-Node::~Node() {};
-
 List::List() {
     head = nullptr;
     tail = nullptr;
@@ -18,30 +10,18 @@ List::~List() {
     clear();
 }
 
-Node *List::begin() {
-    return head;
-}
-
-Node *List::end() {
-    return tail;
-}
-
-int List::size() {
-    return length;
-}
-
-int List::insert(int position, int num) {
+void List::insert(int position, int num) {
     int size = length;
     if (position > size || position < 0) {
-        throw invalid_argument("Invalid position");
+        throw out_of_range("Invalid position");
     }
     if (position == size || head == nullptr) {
         push(num);
-        return num;
+        return;
     }
     Node *temp = head;
     Node *curr = new Node();
-    curr->student = num;
+    curr->data = num;
     for (int i = 0; i < position - 1; i++) {
         temp = temp->next;
     }
@@ -55,12 +35,11 @@ int List::insert(int position, int num) {
         head = curr;
     }
     length++;
-    return num;
 }
 
-int List::push(int num) {
+void List::push(int num) {
     Node *curr = new Node();
-    curr->student = num;
+    curr->data = num;
     curr->next = nullptr;
     if (head == nullptr) {
         curr->prev = nullptr;
@@ -72,17 +51,16 @@ int List::push(int num) {
         tail = curr;
     }
     length++;
-    return num;
 }
 
 string List::to_string() {
     if (length == 0) {
         return "";
     }
-    string s = std::to_string(head->student);
+    string s = std::to_string(head->data);
     Node *curr = head->next;
     while (curr != nullptr) {
-        s = s + ", " + std::to_string(curr->student);
+        s += ", " + std::to_string(curr->data);
         curr = curr->next;
     }
     s = s + '\n';
@@ -95,10 +73,10 @@ void List::fill(int from, int to) {
     }
 }
 
-void List::remove(int position) {
+int List::remove(int position) {
     int size = length;
     if (position > size || position <= 0) {
-        throw invalid_argument("Invalid position");
+        throw out_of_range("Invalid position");
     }
     Node *curr = head;
     for (int i = 0; i < position - 1; i++) {
@@ -115,8 +93,10 @@ void List::remove(int position) {
         curr->next->prev = curr->prev;
         curr->prev->next = curr->next;
     }
+    int value = curr->data;
     delete curr;
     length--;
+    return value;
 }
 
 void List::clear() {
@@ -132,22 +112,22 @@ void List::clear() {
     length = 0;
 }
 
-void List::move_elements(int movers, List *to) {
+void List::move_elements(int count, List *to) {
     Node *curr = head;
     Node *temp = head;
     // getting the last element to move
-    for (int i = 0; i < movers - 1; i++) {
+    for (int i = 0; i < count - 1; i++) {
         curr = curr->next;
     }
-    if (movers != length) {
+    if (count != length) {
         curr->next->prev = nullptr;
     }
     head = curr->next;
     curr->next = to->head;
     to->head->prev = curr;
     to->head = temp;
-    length -= movers;
-    to->length += movers;
+    length -= count;
+    to->length += count;
 }
 
 
