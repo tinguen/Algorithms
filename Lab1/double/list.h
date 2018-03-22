@@ -35,7 +35,7 @@ public:
         }
         iterator(const List &s, size_t nSize): l(s),index(nSize)
         {
-
+            curr = l.tail;
         }
         iterator(const iterator& other):l(other.l),index(other.index)
         {
