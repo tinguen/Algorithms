@@ -82,9 +82,9 @@ public:
     size_t size() {
         return length;
     }
-    void insert(int position, int num);
+    void insert(int position, int num); // out_of_range exception
     void push(int num);
-    int remove(int position);
+    int remove(int position); // out_of_range exception
     void fill(int from, int to); // create Nodes with values from 'int from' to 'int to' and push them to the list
     void clear();
     void move_elements(int count, List *to);

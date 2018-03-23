@@ -64,8 +64,7 @@ BOOST_AUTO_TEST_CASE(iterator_check) {
         int x = *it;
         s += to_string(x) + ", ";
     }
-    s.pop_back();
-    s.pop_back();
+    s = s.substr(0, s.size() - 2);
     s += "\n";
     BOOST_TEST(l1.to_string().compare(s) == 0);
     l1.clear();
