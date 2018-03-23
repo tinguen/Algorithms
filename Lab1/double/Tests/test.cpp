@@ -53,4 +53,20 @@ BOOST_AUTO_TEST_CASE(move_elements_check) {
     l1.move_elements(5, &l2);
     BOOST_TEST(l1.to_string().compare("") == 0);
     BOOST_TEST(l2.to_string().compare("1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n") == 0);
+    l1.clear();
+    l2.clear();
+}
+
+BOOST_AUTO_TEST_CASE(iterator_check) {
+    l1.fill(1, 30);
+    string s = "";
+    for (List::iterator it = l1.begin(); it != l1.end(); ++it) {
+        int x = *it;
+        s += to_string(x) + ", ";
+    }
+    s.pop_back();
+    s.pop_back();
+    s += "\n";
+    BOOST_TEST(l1.to_string().compare(s) == 0);
+    l1.clear();
 }

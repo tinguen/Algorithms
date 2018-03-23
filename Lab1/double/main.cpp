@@ -39,6 +39,4 @@ int main() {
     cout << l2.to_string();
     l1.clear();
     l2.clear();
-    List::iterator it = l1.begin();
-    cout << *it;
 }
