@@ -87,7 +87,7 @@ public:
     int remove(int position); // out_of_range exception
     void fill(int from, int to); // create Nodes with values from 'int from' to 'int to' and push them to the list
     void clear();
-    void move_elements(int count, List *to);
+    void move_elements(int count, List *dest);
 };
 
 #endif //LAB1_A_LIST_H
