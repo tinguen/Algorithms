@@ -39,5 +39,4 @@ public:
     }
     vector<int> to_array();
     void clear();
-//    Tree copy(); // copy this tree to tree t2
 };

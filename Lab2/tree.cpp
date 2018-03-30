@@ -221,12 +221,4 @@ int Tree::remove(int value) {
     return value;
 }
 
-//Tree Tree::copy() {
-//    Tree t2;
-//    vector<int> arr = to_array();
-//    for (auto it = arr.begin(); it != arr.end(); it++) {
-//        t2.push(*it);
-//    }
-//    return t2;
-//}
 
