@@ -2,42 +2,38 @@
 
 using namespace std;
 
-Tree copy(Tree t1, Tree t2) { // make copy of tree t1 into t2
-    vector<int> arr = t1.to_array();
-    for (auto it = arr.begin(); it != arr.end(); it++) {
-        t2.push(*it);
+void copy_helper(Node *curr_t1, Node *prev_t2) { // prev_t2 - previous Node of tree t2, curr_t1 - current Node of tree t1
+    if (curr_t1->left) {
+        Node *element = new Node(curr_t1->left->data);
+        prev_t2->left = element;
+        copy_helper(curr_t1->left, element);
     }
+    if (curr_t1->right) {
+        Node *element = new Node(curr_t1->right->data);
+        prev_t2->right = element;
+        copy_helper(curr_t1->right, element);
+    }
+}
+
+Tree copy(Tree t1, Tree &t2) {
+    t2.push(t1.get_root()->data);
+    copy_helper(t1.get_root(), t2.get_root());
     return t2;
 }
 
 int main() {
-//    Tree t;
-//    Tree t1;
-//    t.push(1000);
-//    t.push(5);
-//    t.push(7);
-//    t.push(4);
-//    t.push(20);
-//    t.push(15);
-//    t.push(30);
-//    t.push(60);
-//    vector<int> array = t.to_array();
-//    for (vector<int>::const_iterator it = array.begin(); it != array.end(); it++) {
-//        cout << *it << endl;
-//    }
-//    cout << t.max() << endl;
-    Tree t1;
+    Tree t;
     Tree t2;
-    t1.push(50);
-    t1.push(10);
-    t1.push(80);
-    t1.push(100);
-    t1.push(60);
-    t2 = copy(t1, t2);
-    vector<int> array1 = t1.to_array();
-    for (vector<int>::const_iterator it = array1.begin(); it != array1.end(); it++) {
-        cout << *it << endl;
-    }
+    t.push(1000);
+    t.push(5);
+    t.push(7);
+    t.push(4);
+    t.push(20);
+    t.push(15);
+    t.push(30);
+    t.push(60);
+    copy(t, t2);
+    vector<int> array = t.to_array();
     vector<int> array2 = t2.to_array();
     for (vector<int>::const_iterator it = array2.begin(); it != array2.end(); it++) {
         cout << *it << endl;
