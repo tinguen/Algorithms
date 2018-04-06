@@ -1,6 +1,7 @@
 #define BOOST_TEST_MODULE Tree
 #include <boost/test/included/unit_test.hpp>
 #include "tree.h"
+#include "copy.cpp"
 
 Tree t1;
 Tree t2;
@@ -50,7 +51,7 @@ BOOST_AUTO_TEST_CASE(to_array_check) {
     t1.clear();
 }
 
-BOOST_AUTO_TEST_CASE(remove_check)  {
+BOOST_AUTO_TEST_CASE(remove_check) {
     t1.push(50);
     t1.push(10);
     t1.push(80);
@@ -67,5 +68,15 @@ BOOST_AUTO_TEST_CASE(remove_check)  {
     BOOST_TEST(t1.to_array() == arr3);
     BOOST_CHECK_EXCEPTION(t1.remove(-10000), out_of_range, is_critical);
     t1.clear();
+}
+
+BOOST_AUTO_TEST_CASE(copy_check) {
+    t1.push(50);
+    t1.push(10);
+    t1.push(80);
+    copy(t1, t2);
+    BOOST_TEST(t1.to_array() == t2.to_array());
+    t1.clear();
+    t2.clear();
 }
 

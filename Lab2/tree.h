@@ -4,6 +4,9 @@
 
 using namespace std;
 
+#ifndef TREE
+#define TREE
+
 struct Node {
     int data;
     Node *left;
@@ -40,3 +43,4 @@ public:
     vector<int> to_array();
     void clear();
 };
+#endif
