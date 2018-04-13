@@ -1,8 +1,6 @@
-tree: clean tree.o
-	g++ tree.o main.cpp -o tree.o
-tree.o: 
+tree: 
 	g++ -c tree.cpp
-test:	clean tree.o
+test:	clean tree
 	g++ tree.o test.cpp -o test.o
 clean:
 	rm -f *.o
