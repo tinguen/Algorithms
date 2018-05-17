@@ -164,7 +164,7 @@ int Tree::remove(int value) {
     if (!arr[1]) {
         throw out_of_range("No such element to remove");
     }
-    if (!(arr[1])->left && !arr[1]->right) {
+    if (!(arr[1]->left) && !(arr[1]->right)) {
         if (arr[0]) {
             if (arr[0]->left == arr[1]) {
                 arr[0]->left = nullptr;
@@ -180,6 +180,8 @@ int Tree::remove(int value) {
             } else {
                 arr[0]->right = arr[1]->left;
             }
+        } else {
+            root = arr[1]->left;
         }
         delete arr[1];
     } else if (!arr[1]->left) {
@@ -189,6 +191,8 @@ int Tree::remove(int value) {
             } else {
                 arr[0]->right = arr[1]->right;
             }
+        } else {
+            root = arr[1]->right;
         }
         delete arr[1];
     } else {
@@ -213,9 +217,6 @@ int Tree::remove(int value) {
         arr[1]->data = tmp->data;
         prev->right = nullptr;
         delete tmp;
-    }
-    if (!arr[0]) {
-        root = nullptr;
     }
     size--;
     return value;
